@@ -10,48 +10,49 @@ export default function Workout() {
     const token = localStorage.getItem('token');
     const [workouts, setWorkouts] = useState([]); 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if( token !== null) { 
-                    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/getMyWorkouts`, {
-                        headers: {Authorization: `Bearer ${token}`}
-                    })
-                    
-                    if(!response.ok) {
-                        let respo = await response.json();
-                        throw new Error(respo.message || respo.error || "Get Workout Failed");
-                    }
-                    
-                    const data = await response.json();
-                    if(data.workouts) {
-                        setWorkouts(data.workouts.map(workout => {
-                            return(
-                                <WorkoutCard key={workout._id} workoutData={workout}/>
-                            )
-                        }))
-                    } else {
-                        setWorkouts(() =>{
-                            return(
-                                <h1 className="text-warning">Oops! You don&apos;nt have workout(s) added yet.</h1>
-                            )
-                        })
-                    }
-                } else {
-                    setWorkouts( () => {
+    const fetchData = async () => {
+        try {
+            if( token !== null) { 
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/getMyWorkouts`, {
+                    headers: {Authorization: `Bearer ${token}`}
+                })
+                
+                if(!response.ok) {
+                    let respo = await response.json();
+                    throw new Error(respo.message || respo.error || "Get Workout Failed");
+                }
+                
+                const data = await response.json();
+                if(data.workouts) {
+                    setWorkouts(data.workouts.map(workout => {
                         return(
-                            <h1 className="text-light">No workout yet. Add one now.</h1>
+                            <WorkoutCard key={workout._id} workoutData={workout} fetchData={fetchData}/>
+                        )
+                    }))
+                } else {
+                    setWorkouts(() =>{
+                        return(
+                            <h1 className="text-warning">Oops! You don&apos;nt have workout(s) added yet.</h1>
                         )
                     })
                 }
-            } catch (error) {
-                Swal.fire({
-                    title: error,
-                    icon: 'error',
-                    timer: 1500
+            } else {
+                setWorkouts( () => {
+                    return(
+                        <h1 className="text-light">No workout yet. Add one now.</h1>
+                    )
                 })
-           }
-        } 
+            }
+        } catch (error) {
+            Swal.fire({
+                title: error,
+                icon: 'error',
+                timer: 1500
+            })
+       }
+    } 
+
+    useEffect(() => {
         fetchData();
     }, [])
 
