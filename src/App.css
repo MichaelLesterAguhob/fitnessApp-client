@@ -1,3 +1,7 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.main-container{
+    height: 100vh;
+    background-image: url('./images/gym.png');
+    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.navbar .navbar-brand{
+    font-size: 1.5rem;
+}
+
+.navbar .nav-link{
+    font-size: 1.1rem;
+}
+
+.tagline{
+    font-size: 2.5rem;
+} 
+
+.workoutCardContainer{
+    backdrop-filter: blur(10px);
+    z-index: -1;
 }
