@@ -9,7 +9,7 @@ import NavBar from './components/NavBar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Workout from './pages/Workout';
-
+import Logout from './components/Logout';
 
 function App() {
   
@@ -22,25 +22,36 @@ function App() {
     }
 
     
-        //     useEffect(() => {
-        //         if(localStorage.getItem('token') !== null) {
-        //             fetch(`https://fitnessapp-api-ln8u.onrender.com/users/details`, {
-        //                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-        //             })
-        //             .then(res => res.json())
-        //             .then(data => {
-        //                     if(data) {
-        //                         setUser({
-        //                         id: data.user._id
-        //                     })
-        //                 }
-        //             })
-        //         } else {
-        //             setUser({
-        //                 id: null
-        //             })
-        //         }
-        // }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if(localStorage.getItem('token') !== null) {
+                   const response = await fetch(`https://fitnessapp-api-ln8u.onrender.com/users/details`, {
+                        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+                    })
+                    
+                    if(!response.ok) {
+                        let respo = await response.json();
+                        throw new Error(respo.message || respo.error || "Getting user details failed")
+                    }
+                    
+                    const data = await response.json();
+                    if(data) {
+                        setUser({
+                            id: data.user._id
+                        })
+                    }
+                } else {
+                    setUser({
+                        id: null
+                    })
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, [])
    
   
     return (
@@ -51,6 +62,7 @@ function App() {
                     <Routes>
                         <Route path='/register' element={<Register />}/>
                         <Route path='/login' element={<Login />}/>
+                        <Route path='/logout' element={<Logout />}/>
                         <Route path='/workouts' element={<Workout />}/>
                     </Routes>
                 </Container>

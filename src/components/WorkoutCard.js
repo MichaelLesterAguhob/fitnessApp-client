@@ -17,11 +17,11 @@ export default function WorkoutCard({workoutData}) {
                     </Container>
                     <Card.Title><h3>{name}</h3></Card.Title>
                     <Card.Text>Duration: {duration}</Card.Text>
-                    <Card.Text>Status: {status}</Card.Text>
+                    <Card.Text className={status === "pending" ? 'text-danger' : 'text-success'}>Status: {status}</Card.Text>
                     {/* <Card.Text>{dateAdded}</Card.Text> */}
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-between">
-                    <Button className="btn btn-success">Completed</Button>
+                    <Button className="btn btn-primary">Mark as Done</Button>
                 </Card.Footer>
             </Card>
         </Col>

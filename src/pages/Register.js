@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,20 +7,28 @@ import Swal from "sweetalert2";
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [submitBtn, setSubmitBtn] = useState(false);
 
     const register = async (e) => {
         e.preventDefault();
-        // console.log(email, password)
-        await fetch(`${process.env.REACT_APP_API_BASE_URL}/users/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
+        
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/users/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+    
+            if(!response.ok) {
+                let responseData = await response.json();
+                console.log(responseData)
+                throw new Error(responseData.error || "Registration Failed.")
+            }
+    
+            const data = await response.json();
             if(data) {
                 if(data.message === "Registered Successfully") {
                     Swal.fire({
@@ -28,6 +36,8 @@ export default function Register() {
                         icon: 'success',
                         timer: 1500,
                     })
+                    setEmail('');
+                    setPassword('');
                 } else if(data.error === "Password must be atleast 8 characters") {
                     Swal.fire({
                         title: data.error,
@@ -42,8 +52,22 @@ export default function Register() {
                     timer: 1500,
                 })
             }
-        })
+        } catch (error) {
+            Swal.fire({
+                title: error,
+                icon: 'error',
+                timer: 1500,
+            })
+        }
     }
+
+    useEffect(() => {
+        if(email !== "" && password !== "") {
+            setSubmitBtn(true);
+        } else {
+            setSubmitBtn(false);
+        }
+    }, [email, password])
 
     return (
         <Container className="mb-5 h-100 d-flex flex-column">
@@ -67,10 +91,16 @@ export default function Register() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <span className="text-warning">Password must be atleast 8 characters</span>
+                            <span className="text-danger">Password must be atleast 8 characters</span>
                         </Form.Group>
 
-                        <Button type="submmit" className="btn btn-primary w-100 mb-4">Register!</Button>
+                        {
+                            submitBtn === true ?
+                            <Button type="submmit" className="btn btn-primary w-100 mb-4">Register!</Button>
+                            :
+                            <Button type="submmit" className="btn btn-primary w-100 mb-4" disabled>Register!</Button>
+                        }
+
                         <span className="">Already have an account? <Link to={'/login'}>Login</Link></span>
                     </Form>
                 </Col>
