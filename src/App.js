@@ -58,8 +58,9 @@ function App() {
         <UserProvider value={{user, unsetUser, setUser}}>
             <Router>
                 <NavBar />
-                <Container className='bg-secondary main-container mt-5' fluid>
+                <Container className='bg-secondary main-container' fluid>
                     <Routes>
+                        <Route path='/' element={<Workout />}/>
                         <Route path='/register' element={<Register />}/>
                         <Route path='/login' element={<Login />}/>
                         <Route path='/logout' element={<Logout />}/>

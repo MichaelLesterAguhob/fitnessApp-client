@@ -48,10 +48,12 @@
     background-position:center;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: auto;
 }
 
 .navbar .navbar-brand{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 900;
 }
 
 .navbar .nav-link{
@@ -66,3 +68,5 @@
     backdrop-filter: blur(10px);
     z-index: -1;
 }
+
+

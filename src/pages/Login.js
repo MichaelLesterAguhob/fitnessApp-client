@@ -115,9 +115,9 @@ export default function Login() {
         (user.id !== null) ?
         <Navigate to={'/workouts'} />
         :
-        <Container className="mt-5 mb-5 h-100 d-flex flex-column">
-            <h1 className="tagline mt-5 mx-auto text-light fw-bolder text-center">Unleash Your Potential: Fitness Starts Here!</h1>
-            <Row className="my-auto">
+        <Container className="mt-5 h-75 d-flex flex-column">
+            <h1 className="tagline mt-5 mb-5 mx-auto text-light fw-bolder text-center">Unleash Your Potential: Fitness Starts Here!</h1>
+            <Row className="my-auto pb-5">
                 <Col className="mx-auto" xs={12} sm={9} md={7} lg={5}>
                     <Form onSubmit={(e) => login(e)} className="rounded p-4 shadow  bg-light">
                         <h1 className="text-center mb-4">Login</h1>

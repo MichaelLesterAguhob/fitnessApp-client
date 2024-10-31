@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 export default function WorkoutCard({workoutData, fetchData}) {
 
     const {name, status, duration, dateAdded, _id} = workoutData;     
+   
 
     const deleteWorkout = async(id) => {
         if(id === null  || !id) {
@@ -30,7 +31,11 @@ export default function WorkoutCard({workoutData, fetchData}) {
 
         const data = await response.json();
         if(data) {
-            console.log(data);
+            Swal.fire({
+                title: 'Deleted successfully',
+                icon: 'success',
+                timer: 1200
+            })
             fetchData();
         }
         
@@ -49,7 +54,7 @@ export default function WorkoutCard({workoutData, fetchData}) {
                     <Card.Text className={status === "pending" ? 'text-danger' : 'text-success'}>Status: {status}</Card.Text>
                     {/* <Card.Text>{dateAdded}</Card.Text> */}
                 </Card.Body>
-                <Card.Footer className="d-flex justify-content-between">
+                <Card.Footer className="d-flex justify-content-center">
                     <Button className="btn btn-primary">Mark as Done</Button>
                 </Card.Footer>
             </Card>
