@@ -151,7 +151,7 @@ export default function Workout() {
                 <Container className="h-100 overflow-auto workoutCardContainer pt-5">
                     <Container className="bg-light rounded mt-5 d-flex justify-content-between align-items-center">
                         <h1 className="text-dark p-2">Your Workouts</h1>
-                        <Button className="btn btn-success h-75" onClick={showModal}><img src={plusIcon} style={{width: '1.5rem'}}/> {(showBtnText === true) ? "NEW" : ""}</Button>
+                        <Button id='addWorkout' className="btn btn-success h-75" onClick={showModal}><img src={plusIcon} style={{width: '1.5rem'}}/> {(showBtnText === true) ? "NEW" : ""}</Button>
                     </Container>
                     <Row className="d-flex justify-content-center mt-3 mb-5">
                         {workouts}
