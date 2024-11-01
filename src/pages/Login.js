@@ -15,7 +15,7 @@ export default function Login() {
 
     const login = async (e) => {
         e.preventDefault();
-       
+     
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
                 method: 'POST',
@@ -33,8 +33,9 @@ export default function Login() {
             }
     
             const data = await response.json();
-    
+  
             if(data) {
+  
                 if(data.access) {
                     localStorage.setItem('token', data.access);
                     getUserDetails(data.access);

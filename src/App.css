@@ -1,6 +1,9 @@
 * {
     font-family: 'Courier New', Courier, monospace;
 }
+html{
+    scroll-behavior: smooth;
+}
 
 .App {
   text-align: center;
@@ -43,7 +46,8 @@
 
 
 .main-container{
-    height: 100vh;
+    height: 93vh;
+    margin-top: 50px;
     background-image: url('./images/gym.png');
     background-position:center;
     background-size: cover;

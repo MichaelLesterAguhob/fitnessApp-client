@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Workout from './pages/Workout';
+import CompleteWorkout from './pages/CompletedWorkout';
 import Logout from './components/Logout';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                         <Route path='/login' element={<Login />}/>
                         <Route path='/logout' element={<Logout />}/>
                         <Route path='/workouts' element={<Workout />}/>
+                        <Route path='/completed' element={<CompleteWorkout />}/>
                     </Routes>
                 </Container>
             </Router>

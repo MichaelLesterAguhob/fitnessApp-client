@@ -14,7 +14,7 @@ export default function NavBar() {
     }
     window.addEventListener('resize', () => {
         const viewportWidth = window.innerWidth;
-        console.log(`Viewport width: ${viewportWidth}px`);
+        // console.log(`Viewport width: ${viewportWidth}px`);
     });
     return (
         <Navbar bg="primary" expand="lg" fixed="top" className="text-light">
