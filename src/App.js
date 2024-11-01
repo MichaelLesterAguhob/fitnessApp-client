@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Workout from './pages/Workout';
 import CompleteWorkout from './pages/CompletedWorkout';
 import Logout from './components/Logout';
+import Footer from './components/Footer';
 
 function App() {
   
@@ -69,6 +70,7 @@ function App() {
                         <Route path='/completed' element={<CompleteWorkout />}/>
                     </Routes>
                 </Container>
+                <Footer />
             </Router>
         </UserProvider>
   );
