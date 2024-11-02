@@ -19,7 +19,7 @@ export default function NavBar() {
     return (
         <Navbar bg="primary" expand="lg" fixed="top" className="text-light">
             <Container fluid>
-                <Navbar.Brand as={Link} to="/" className='text-light'>Fitness</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className='text-light'>F I T</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light" ref={toggler}/>
                 <Navbar.Collapse id="basic-navbar-nav">
                    
